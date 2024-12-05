@@ -13,7 +13,7 @@
         Titre du Morceau <small class="text-muted">- Artiste</small>
     </h1>
     <audio controls aria-label="Lecteur audio" style="width:100%;margin-bottom:20px;">
-        <source src="music.mp3" type="audio/mpeg">
+        <source src="\assets\audio\audio.mp3" type="audio/mpeg">
         Votre navigateur ne supporte pas l'élément audio.
     </audio>
     <div>

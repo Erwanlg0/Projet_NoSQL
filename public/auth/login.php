@@ -9,6 +9,9 @@
 </head>
 <body class="bg-light">
 <div class="container" style="max-width: 400px; margin-top:100px;">
+    <div class="mb-3 text-center">
+        <a href="/index.php" class="btn btn-secondary">Accueil</a>
+    </div>
     <div class="card p-4">
         <h1 class="h4 mb-3 text-center">Connexion</h1>
         <form aria-label="Formulaire de connexion">
@@ -16,8 +19,18 @@
                 <label for="username" class="form-label">Nom d'utilisateur</label>
                 <input type="text" name="username" id="username" class="form-control" required aria-label="Entrer votre nom d'utilisateur">
             </div>
-            <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" name="password" id="password" class="form-control" required aria-label="Entrer votre mot de passe">
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-3">Se connecter</button>
+            <div class="text-center">
+                <a href="forgot_password.php" class="text-decoration-none">Mot de passe oublié ?</a>
+            </div>
         </form>
+        <hr>
+        <p class="text-center">Pas encore inscrit ?</p>
+        <a href="register.php" class="btn btn-secondary w-100">Créer un compte</a>
     </div>
 </div>
 </body>
