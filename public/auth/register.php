@@ -40,3 +40,19 @@
     </div>
 </body>
 </html>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    include_once __DIR__ . '/../../src/config/config.php';
+    include_once __DIR__ . '/../../src/include/functions.php';
+
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    if (registerUser($email, $password)) {
+        echo "<p>Inscription réussie ! Vous pouvez maintenant vous connecter.</p>";
+    } else {
+        echo "<p>Erreur : L'inscription a échoué.</p>";
+    }
+}
+?>
+

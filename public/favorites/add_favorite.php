@@ -13,3 +13,23 @@
 </div>
 </body>
 </html>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    include_once __DIR__ . '/../../src/config/config.php';
+    include_once __DIR__ . '/../../src/include/functions.php';
+
+    session_start();
+    if (!isset($_SESSION['user'])) {
+        die("<p>Erreur : Vous devez être connecté pour ajouter un favori.</p>");
+    }
+
+    $userId = $_SESSION['user']->_id;
+    $trackId = $_POST['trackId'] ?? '';
+
+    if (addFavorite($userId, $trackId)) {
+        echo "<p>Favori ajouté avec succès !</p>";
+    } else {
+        echo "<p>Erreur : Impossible d'ajouter le favori.</p>";
+    }
+}
+?>

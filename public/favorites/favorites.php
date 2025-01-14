@@ -35,3 +35,35 @@
 </div>
 </body>
 </html>
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    die("<p>Erreur : Vous devez être connecté pour voir vos favoris.</p>");
+}
+
+include_once __DIR__ . '/../../src/config/config.php';
+include_once __DIR__ . '/../../src/include/functions.php';
+
+$userId = $_SESSION['user']->_id;
+$favorites = getFavorites($userId);
+
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mes Favoris</title>
+</head>
+<body>
+    <h1>Mes Favoris</h1>
+    <?php if (empty($favorites)): ?>
+        <p>Vous n'avez aucun favori pour l'instant.</p>
+    <?php else: ?>
+        <ul>
+            <?php foreach ($favorites as $favorite): ?>
+                <li>ID de la piste : <?= htmlspecialchars($favorite->trackId) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</body>
+</html>

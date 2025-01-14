@@ -35,3 +35,23 @@
 </div>
 </body>
 </html>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    include_once __DIR__ . '/../../src/config/config.php';
+    include_once __DIR__ . '/../../src/include/functions.php';
+
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    $user = authenticateUser($email, $password);
+
+    if ($user) {
+        session_start();
+        $_SESSION['user'] = $user;
+        header('Location: /index.php');
+        exit;
+    } else {
+        echo "<p>Erreur : Email ou mot de passe incorrect.</p>";
+    }
+}
+?>

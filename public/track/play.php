@@ -22,3 +22,41 @@
 </div>
 </body>
 </html>
+<?php
+if (isset($_GET['trackId'])) {
+    include_once __DIR__ . '/../../src/config/config.php';
+    include_once __DIR__ . '/../../src/include/functions.php';
+
+    $trackId = $_GET['trackId'];
+
+    $query = new MongoDB\Driver\Query(['_id' => new MongoDB\BSON\ObjectId($trackId)]);
+    $cursor = $manager->executeQuery("$dbName.tracks", $query);
+    $track = current($cursor->toArray());
+
+    if ($track):
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture de <?= htmlspecialchars($track->title) ?></title>
+</head>
+<body>
+    <h1>Lecture de la piste : <?= htmlspecialchars($track->title) ?></h1>
+    <p>Artiste : <?= htmlspecialchars($track->artist) ?></p>
+    <audio controls>
+        <source src="<?= htmlspecialchars($track->audioUrl) ?>" type="audio/mpeg">
+        Votre navigateur ne supporte pas la lecture audio.
+    </audio>
+</body>
+</html>
+<?php
+    else:
+        echo "<p>Piste introuvable.</p>";
+    endif;
+} else {
+    echo "<p>Aucune piste sélectionnée.</p>";
+}
+?>
+
